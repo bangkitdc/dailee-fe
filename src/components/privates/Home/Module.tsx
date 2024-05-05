@@ -6,6 +6,7 @@ import { Sad } from "@/assets/icons/Face/Sad";
 import { Tired } from "@/assets/icons/Face/Tired";
 import { Send } from "@/assets/icons/Send";
 import { PrimaryButton } from "@/components/shares/Buttons";
+import { OuterButton } from "@/components/shares/Buttons/OuterButton";
 import { PrimaryCard } from "@/components/shares/Cards";
 import { PrimaryInputText } from "@/components/shares/Inputs";
 import { ChangeEvent, useState } from "react";
@@ -19,31 +20,56 @@ export const Module = () => {
     setDiary(event.target.value);
   };
 
+  const [selectedMood, setSelectedMood] = useState<string>("");
+
+  const handleMoodClick = (mood: string) => {
+    if (selectedMood === mood) {
+      setSelectedMood("");
+    } else {
+      setSelectedMood(mood);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-8 pb-4">
       <div className="flex flex-col gap-4 mx-5">
         <h2 className="font-medium">How are you today?</h2>
-        <div className="flex justify-around">
-          <div className="flex flex-col gap-2">
+        <div className="flex justify-around *:flex *:flex-col *:gap-2 *:items-center *:ease-linear *:duration-200">
+          <OuterButton
+            className={selectedMood === "happy" ? "drop-shadow-face-01" : ""}
+            onClick={() => handleMoodClick("happy")}
+          >
             <Happy />
-            <p className="text-xs text-center">Happy</p>
-          </div>
-          <div className="flex flex-col gap-2">
+            <p className="text-xs">Happy</p>
+          </OuterButton>
+          <OuterButton
+            className={selectedMood === "fear" ? "drop-shadow-face-02" : ""}
+            onClick={() => handleMoodClick("fear")}
+          >
             <Fear />
-            <p className="text-xs text-center">Fear</p>
-          </div>
-          <div className="flex flex-col gap-2">
+            <p className="text-xs">Fear</p>
+          </OuterButton>
+          <OuterButton
+            className={selectedMood === "sad" ? "drop-shadow-face-03" : ""}
+            onClick={() => handleMoodClick("sad")}
+          >
             <Sad />
-            <p className="text-xs text-center">Sad</p>
-          </div>
-          <div className="flex flex-col gap-2">
+            <p className="text-xs">Sad</p>
+          </OuterButton>
+          <OuterButton
+            className={selectedMood === "tired" ? "drop-shadow-face-04" : ""}
+            onClick={() => handleMoodClick("tired")}
+          >
             <Tired />
-            <p className="text-xs text-center">Tired</p>
-          </div>
-          <div className="flex flex-col gap-2">
+            <p className="text-xs">Tired</p>
+          </OuterButton>
+          <OuterButton
+            className={selectedMood === "angry" ? "drop-shadow-face-05" : ""}
+            onClick={() => handleMoodClick("angry")}
+          >
             <Angry />
-            <p className="text-xs text-center">Angry</p>
-          </div>
+            <p className="text-xs">Angry</p>
+          </OuterButton>
         </div>
 
         <PrimaryInputText
