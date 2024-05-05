@@ -62,6 +62,23 @@ export default {
         "input-error": "0 0 0 1px #f15e6c",
         "input-focus-error": "0 0 0 1.5px #f15e6c",
       },
+      dropShadow: {
+        "face-01": "0 10px 20px rgba(251, 213, 100, 1)",
+        "face-02": "0 10px 20px rgba(134, 219, 93, 1)",
+        "face-03": "0 10px 20px rgba(84, 84, 84, 0.5)",
+        "face-04": "0 10px 20px rgba(246, 179, 79, 1)",
+        "face-05": "0 10px 20px rgba(236, 105, 105, 1)",
+      },
+      animation: {
+        popUp:
+          "popUp 0.5s ease forwards, pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
+      keyframes: {
+        popUp: {
+          "0%": { transform: "scale(0)", opacity: 0 },
+          "100%": { transform: "scale(1)", opacity: 1 },
+        },
+      },
     },
   },
   plugins: [],
