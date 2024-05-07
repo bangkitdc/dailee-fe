@@ -44,6 +44,11 @@ export default {
         "neutral-200": "#EEEEEE",
         "neutral-100": "#F5F5F5",
         "neutral-50": "#FAFAFA",
+        "neutral-0": "#FAFBFE",
+
+        "input-icon": "#9A9A9A",
+
+        "indicator-error": "#F43518",
       },
       fontFamily: {
         poppins: ["Poppins"],
@@ -55,12 +60,13 @@ export default {
         "artikel-3": "url('/icons/bg-artikel-3.svg')",
         "students-module":
           "url('/icons/bg-students-module.svg'), linear-gradient(to bottom, rgba(246, 237, 207, 0.5), rgba(243, 220, 152, 0.75))",
+        logo: "url('/icons/bg-logo.svg')",
       },
       boxShadow: {
         input: "0 0 0 1px #E3E5E5",
         "input-focus": "0 0 0 1.5px #A2A2A2",
-        "input-error": "0 0 0 1px #f15e6c",
-        "input-focus-error": "0 0 0 1.5px #f15e6c",
+        "input-error": "0 0 0 1px #F43518",
+        "input-focus-error": "0 0 0 1.5px #F43518",
       },
       dropShadow: {
         "face-01": "0 10px 20px rgba(251, 213, 100, 1)",

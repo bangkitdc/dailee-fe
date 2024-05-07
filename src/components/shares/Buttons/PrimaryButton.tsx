@@ -16,7 +16,7 @@ export const PrimaryButton = ({
   return (
     <button
       onClick={onClick}
-      className={`font-semibold ${
+      className={`${
         type === "default" ? "px-5 py-2 shadow rounded-full" :
         type === "icon-only" ? "p-2 w-fit flex items-center justify-center" :
         ""

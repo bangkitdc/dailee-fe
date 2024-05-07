@@ -22,10 +22,17 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"],
-      "@/components/*": ["components/*"],
-      "@/pages/*": ["pages/*"],
-      "@/assets/*": ["assets/*"],
+      "@/*": ["./src/*"],
+      "@apis": ["apis"],
+      "@apis/*": ["apis/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@contexts": ["contexts"],
+      "@contexts/*": ["contexts/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@pages/*": ["pages/*"],
+      "@providers": ["providers"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": ["src"],

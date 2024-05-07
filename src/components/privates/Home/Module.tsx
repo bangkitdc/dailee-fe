@@ -1,14 +1,14 @@
-import { Arrow } from "@/assets/icons/Arrow";
-import { Angry } from "@/assets/icons/Face/Angry";
-import { Fear } from "@/assets/icons/Face/Fear";
-import { Happy } from "@/assets/icons/Face/Happy";
-import { Sad } from "@/assets/icons/Face/Sad";
-import { Tired } from "@/assets/icons/Face/Tired";
-import { Send } from "@/assets/icons/Send";
-import { PrimaryButton } from "@/components/shares/Buttons";
-import { OuterButton } from "@/components/shares/Buttons/OuterButton";
-import { PrimaryCard } from "@/components/shares/Cards";
-import { PrimaryInputText } from "@/components/shares/Inputs";
+import { Arrow } from "@assets/icons/Arrow";
+import { Angry } from "@assets/icons/Face/Angry";
+import { Fear } from "@assets/icons/Face/Fear";
+import { Happy } from "@assets/icons/Face/Happy";
+import { Sad } from "@assets/icons/Face/Sad";
+import { Tired } from "@assets/icons/Face/Tired";
+import { Send } from "@assets/icons/Send";
+import { PrimaryButton } from "@components/shares/Buttons";
+import { OuterButton } from "@components/shares/Buttons/OuterButton";
+import { PrimaryCard } from "@components/shares/Cards";
+import { PrimaryInputText } from "@components/shares/Inputs";
 import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -86,7 +86,7 @@ export const Module = () => {
           }
         />
 
-        <PrimaryCard className="flex flex-col gap-2 bg-green-04 bg-assessment rounded-xl mt-2">
+        <PrimaryCard className="flex flex-col gap-2 bg-green-04 bg-assessment bg-center bg-no-repeat rounded-xl mt-2">
           <p className="text-green-01 font-semibold">
             Mental Health Assessment
           </p>
@@ -98,7 +98,7 @@ export const Module = () => {
               <PrimaryButton
                 text="Start"
                 type="default"
-                className="bg-green-01 text-xs text-white-01"
+                className="bg-green-01 text-xs text-white-01 font-semibold"
                 onClick={() => {
                   toast.success("Starting Assessment!");
                 }}
@@ -120,7 +120,7 @@ export const Module = () => {
         </div>
 
         <div className="flex flex-row gap-4 px-5 overflow-x-auto pb-2">
-          <PrimaryCard className="relative justify-between bg-cream-01 bg-artikel-1 rounded-2xl min-w-32 max-w-32 h-32">
+          <PrimaryCard className="relative justify-between bg-cream-01 bg-artikel-1 bg-right bg-no-repeat rounded-2xl min-w-32 max-w-32 h-32">
             <p className="text-xs leading-[18px] text-orange-02 font-semibold">
               Managing Health Anxiety and Panic
             </p>
@@ -128,7 +128,7 @@ export const Module = () => {
               <Arrow fillClassName="fill-orange-01" />
             </div>
           </PrimaryCard>
-          <PrimaryCard className="relative justify-between bg-blue-03 bg-artikel-2 rounded-2xl min-w-32 max-w-32 h-32">
+          <PrimaryCard className="relative justify-between bg-blue-03 bg-artikel-2 bg-right bg-no-repeat rounded-2xl min-w-32 max-w-32 h-32">
             <p className="text-xs leading-[18px] text-blue-02 font-semibold">
               Insomnia and Sleep Disorder
             </p>
@@ -136,7 +136,7 @@ export const Module = () => {
               <Arrow fillClassName="fill-blue-01" />
             </div>
           </PrimaryCard>
-          <PrimaryCard className="relative justify-between bg-purple-02 bg-artikel-3 rounded-2xl min-w-32 max-w-32 h-32">
+          <PrimaryCard className="relative justify-between bg-purple-02 bg-artikel-3 bg-right bg-no-repeat rounded-2xl min-w-32 max-w-32 h-32">
             <p className="text-xs leading-[18px] text-purple-01 font-semibold">
               Managing Schizophernia
             </p>
@@ -147,7 +147,7 @@ export const Module = () => {
         </div>
 
         <div className="mx-5">
-          <PrimaryCard className="flex flex-col gap-2 rounded-xl bg-students-module">
+          <PrimaryCard className="flex flex-col gap-2 rounded-xl bg-students-module bg-right bg-no-repeat">
             <p className="text-brown-02 font-semibold">Student's Module</p>
             <div className="flex flex-col gap-4">
               <p className="w-2/3 text-xs leading-[18px] text-brown-01">
@@ -156,7 +156,7 @@ export const Module = () => {
               <PrimaryButton
                 text="Access Now"
                 type="default"
-                className="bg-white-01 text-xs text-orange-01 w-fit"
+                className="bg-white-01 text-xs text-orange-01 w-fit font-semibold"
                 onClick={() => console.log()}
               />
             </div>

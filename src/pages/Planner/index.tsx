@@ -1,4 +1,4 @@
-import { BottomNav } from "@/components/shares/BottomNav";
+import { BottomNav } from "@components/shares/BottomNav";
 
 export const Planner = () => {
   return (
