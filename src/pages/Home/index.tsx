@@ -1,6 +1,6 @@
-import { Notification } from "@/assets/icons/Notification";
-import { Module } from "@/components/privates/Home/Module"
-import { BottomNav } from "@/components/shares/BottomNav"
+import { Notification } from "@assets/icons/Notification";
+import { Module } from "@components/privates/Home/Module"
+import { BottomNav } from "@components/shares/BottomNav"
 
 export const Home = () => {
   return (

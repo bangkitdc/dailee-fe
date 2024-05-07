@@ -29,9 +29,9 @@ export const Logo = () => {
           width="182.498"
           height="73.6353"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -65,8 +65,8 @@ export const Logo = () => {
           y2="84.312"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F5BD69" />
-          <stop offset="0.425" stop-color="#F7EDCF" />
+          <stop stopColor="#F5BD69" />
+          <stop offset="0.425" stopColor="#F7EDCF" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_141_487"
@@ -76,10 +76,10 @@ export const Logo = () => {
           y2="96.0569"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFF2CA" />
-          <stop offset="0.44" stop-color="#FEE6B3" />
-          <stop offset="0.654688" stop-color="#FBD38B" />
-          <stop offset="1" stop-color="#EFAA56" />
+          <stop stopColor="#FFF2CA" />
+          <stop offset="0.44" stopColor="#FEE6B3" />
+          <stop offset="0.654688" stopColor="#FBD38B" />
+          <stop offset="1" stopColor="#EFAA56" />
         </linearGradient>
       </defs>
     </svg>

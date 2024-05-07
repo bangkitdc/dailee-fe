@@ -1,45 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import './index.css'
-import { Home } from './pages/Home';
-import { Planner } from './pages/Planner';
-import { Social } from './pages/Social';
-import { Profile } from './pages/Profile';
-import { Toaster } from 'react-hot-toast';
-import { Loading } from './components/shares/Layouts';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />
-  },
-  {
-    path: '/planner',
-    element: <Planner />
-  },
-  {
-    path: '/social',
-    element: <Social />
-  },
-  {
-    path: '/profile',
-    element: <Profile />
-  }
-]);
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import { Toaster } from "react-hot-toast";
+import App from "./App";
+import { ApiProvider, AuthProvider } from "@providers";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <BrowserRouter>
     <div className="w-full bg-slate-100 flex items-center justify-center">
       <main className="relative bg-white">
-        <Toaster 
+        <Toaster
           toastOptions={{
-            className:"font-poppins text-sm"
+            className: "font-poppins text-sm",
           }}
         />
-        <RouterProvider router={router} />
-        <Loading />
+        <ApiProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </ApiProvider>
       </main>
     </div>
-  </React.StrictMode>
+  </BrowserRouter>
 );

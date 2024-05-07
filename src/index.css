@@ -130,9 +130,9 @@ main {
   width: 100%;
 }
 
-@media (min-width: 425px) {
+@media (min-width: 430px) {
   main {
-    width: 425px;
+    width: 430px;
   }
 }
 

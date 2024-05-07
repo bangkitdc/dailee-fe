@@ -1,7 +1,7 @@
-import { Home } from "@/assets/icons/Home";
-import { Planner } from "@/assets/icons/Planner";
-import { Profile } from "@/assets/icons/Profile";
-import { Social } from "@/assets/icons/Social";
+import { Home } from "@assets/icons/Home";
+import { Planner } from "@assets/icons/Planner";
+import { Profile } from "@assets/icons/Profile";
+import { Social } from "@assets/icons/Social";
 import { Link } from "react-router-dom";
 
 type BottomNavPropType = {
