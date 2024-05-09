@@ -6,7 +6,8 @@ const taskCategory = () => {
   const { apiUrl } = support();
 
   const url = {
-    taskCategory: apiUrl.taskCategory
+    taskCategory: apiUrl.taskCategory.self,
+    addValidate: apiUrl.taskCategory.addValidate
   }
 
   const getTaskCategories = async () => {
@@ -17,8 +18,28 @@ const taskCategory = () => {
     return response.data;
   }
 
+  const addValidateTaskCategory = async (task_category: IApiBaseTaskCategory) => {
+    const response = await api.post<IApiBaseResponse<undefined>>(
+      url.addValidate,
+      task_category
+    );
+
+    return response.data;
+  }
+
+  const updateTaskCategories = async (task_categories: IApiBaseTaskCategory[]) => {
+    const response = await api.put<IApiBaseResponse<IApiBaseTaskCategory[]>>(
+      url.taskCategory,
+      task_categories
+    );
+
+    return response.data;
+  }
+
   return {
-    getTaskCategories
+    getTaskCategories,
+    addValidateTaskCategory,
+    updateTaskCategories
   }
 }
 

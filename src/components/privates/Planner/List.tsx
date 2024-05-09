@@ -11,12 +11,47 @@ import { closestCorners, DndContext, DragEndEvent, PointerSensor, TouchSensor, u
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { DndCard } from "@components/shares/DndCards";
 import { IApiBaseTaskCategory } from "@interfaces/taskCategory";
+import { PlusCircle } from "@assets/icons/Plus";
+import { PrimaryInputText } from "@components/shares/Inputs";
+
+const initialTaskCategory: IApiBaseTaskCategory = {
+  task_category_id: -1,
+  task_category_name: ""
+}
 
 export const List = () => {
   const { user } = useAuth();
+  const apiBaseError = apiBase().error<IApiBaseError>();
 
   // Modal
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  // Category
+  const [modalAddOpen, setModalAddOpen] = useState<boolean>(false);
+  const [newTaskCategory, setNewTaskCategory] = useState<IApiBaseTaskCategory>(initialTaskCategory);
+
+  const handleAddValidate = async () => {
+    try {
+      const res = await apiBase().taskCategory().addValidateTaskCategory(
+        newTaskCategory
+      );
+
+      if (res.status === "success") {
+        setModalAddOpen(false);
+        setTaskCategories((prevCategories) => [
+          ...prevCategories,
+          newTaskCategory,
+        ]);
+
+        apiBaseError.clear();
+
+        setNewTaskCategory(initialTaskCategory);
+      }
+    } catch (error) {
+      apiBaseError.set(error);
+      toast.error(apiBaseError.getMessage() ?? "Error occured");
+    }
+  }
 
   // Date
   const today = new Date();
@@ -27,8 +62,6 @@ export const List = () => {
     date.setDate(today.getDate() + index);
     return date;
   });
-
-  const apiBaseError = apiBase().error<IApiBaseError>();
 
   // Animation
   const [loading, setLoading] = useState<boolean>(true);
@@ -52,6 +85,21 @@ export const List = () => {
       if (res.status === "success") {
         // Set task categories data
         setTaskCategories(res.data);
+      }
+    } catch (error) {
+      apiBaseError.set(error);
+      toast.error(apiBaseError.getMessage() ?? "Error occured");
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const res = await apiBase().taskCategory().updateTaskCategories(
+        taskCategories
+      );
+
+      if (res.status === "success") {
+        toast.success(res.message);
       }
     } catch (error) {
       apiBaseError.set(error);
@@ -93,7 +141,7 @@ export const List = () => {
 
   return (
     <>
-      <PrimaryModal open={modalOpen} setOpen={setModalOpen}>
+      <PrimaryModal open={modalOpen} setOpen={setModalOpen} apiBaseError={apiBaseError}>
         <div className="flex flex-col gap-3">
           <h1 className="text-lg font-semibold text-neutral-600">
             Modify Task Preference
@@ -122,10 +170,56 @@ export const List = () => {
                       />
                     ))}
                   </SortableContext>
+                  <BaseButton
+                    className="w-full bg-white-01 text-neutral-550 font-normal rounded-[10px] border text-center border-neutral-400 text-xs py-1.5"
+                    onClick={() => setModalAddOpen(true)}
+                  >
+                    <div className="flex flex-row gap-2 items-center justify-center">
+                      <PlusCircle strokeClassName="stroke-neutral-550" />
+                      <p className="text-neutral-550 font-normal">
+                        Add Category
+                      </p>
+                    </div>
+                  </BaseButton>
                 </div>
               </div>
             </div>
           </DndContext>
+          <div className="mt-6">
+            <PrimaryButton
+              text="Save"
+              className="bg-orange-01 text-neutral-0 py-2.5 font-semibold w-full"
+              onClick={handleSubmit}
+            />
+          </div>
+        </div>
+      </PrimaryModal>
+      <PrimaryModal open={modalAddOpen} setOpen={setModalAddOpen} apiBaseError={apiBaseError}>
+        <div className="flex flex-col gap-5">
+          <h1 className="text-lg font-semibold text-neutral-600">
+            Add New Task Category
+          </h1>
+          <PrimaryInputText
+            id="task_category_name"
+            className="p-2 text-xs"
+            type="text"
+            placeholder="Task category name"
+            value={newTaskCategory.task_category_name}
+            setValue={(e) =>
+              setNewTaskCategory({
+                ...newTaskCategory,
+                task_category_name: e.target.value,
+              })
+            }
+            error={apiBaseError.getErrors("task_category_name")?.[0].toString()}
+          />
+          <div className="mt-3">
+            <PrimaryButton
+              text="Submit"
+              className="bg-orange-01 text-neutral-0 py-2.5 font-semibold w-full"
+              onClick={handleAddValidate}
+            />
+          </div>
         </div>
       </PrimaryModal>
       <div

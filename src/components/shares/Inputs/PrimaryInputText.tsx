@@ -12,6 +12,7 @@ type PrimaryInputTextPropType = {
   setValue: (event: ChangeEvent<HTMLInputElement>) => void;
   button?: React.ReactNode;
   icon?: React.ReactNode;
+  className?: string;
 };
 
 export const PrimaryInputText = ({
@@ -23,7 +24,8 @@ export const PrimaryInputText = ({
   error = "",
   setValue,
   button,
-  icon
+  icon,
+  className
 }: PrimaryInputTextPropType) => {
   const needEye = type === "password";
   const typeInput = type === "password-no-eye" ? "password" : type;
@@ -61,7 +63,8 @@ export const PrimaryInputText = ({
               : "hover:shadow-input-hover focus:shadow-input-focus"
           }
           ${icon ? "pl-12" : ""}
-          ${disabled ? "bg-gray-500" : ""}`}
+          ${disabled ? "bg-gray-500" : ""}
+          ${className}`}
         />
 
         {(needEye || button) && (

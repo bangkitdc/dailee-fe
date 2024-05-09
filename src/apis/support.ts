@@ -27,7 +27,10 @@ export const support = () => {
       submit: "assessments/submit"
     },
 
-    taskCategory: "task-categories"
+    taskCategory: {
+      self: "task-categories",
+      addValidate: "task-categories/add-validate"
+    }
   };
 
   return { apiUrl };
