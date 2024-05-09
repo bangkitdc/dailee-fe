@@ -171,3 +171,73 @@ html {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
+/** Input range */
+input[type="range"] {
+  --range-progress: 0;
+  -webkit-appearance: none;
+  position: relative;
+  background: #FFF9E7;
+  width: 100%;
+  height: 4px;
+  border-radius: 5px;
+}
+
+/* Input range - firefox */
+input[type="range"]::-moz-range-track {
+  position: relative;
+  background: #FFF9E7;
+  width: 100%;
+  height: 4px;
+  border-radius: 5px;
+}
+
+/* played progress length - Chrome & safari*/
+input[type="range"]::before {
+  content: '';
+  height: 4px;
+  background: #EFAA56;
+  width: var(--range-progress);
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+/* played progress length - firefox */
+input[type="range"]::-moz-range-progress {
+  background: #EFAA56;
+  border-radius: 5px;
+  height: 4px;
+}
+
+/* slider thumb - chrome and safari */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 0px;
+  width: 0px;
+  border-radius: 50%;
+  border: none;
+  background-color: #EFAA56;
+  position: relative;
+}
+
+/* dragging thumb - chrome and safari */
+input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+
+/* slider thumb - firefox */
+input[type="range"]::-moz-range-thumb {
+  height: 0px;
+  width: 0px;
+  border-radius: 50%;
+  background: #EFAA56;
+  border: transparent;
+  position: relative;
+}
+/* dragging thumb - firefox */
+input[type="range"]:active::-moz-range-thumb {
+  transform: scale(1.2);
+}

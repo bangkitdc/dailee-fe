@@ -10,7 +10,7 @@ type BottomNavPropType = {
 
 export const BottomNav = ({ screen }: BottomNavPropType) => {
   return (
-    <div className="w-full absolute bottom-0 bg-white border-t border-t-white-02">
+    <div className="w-full absolute bottom-0 bg-white border-t border-t-white-02 z-40">
       <div className="grid grid-cols-4">
         <Link
           to={"/"}

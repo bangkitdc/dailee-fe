@@ -1,4 +1,4 @@
-import { Arrow } from "@assets/icons/Arrow";
+import { LongArrow } from "@assets/icons/Arrow";
 import { Angry } from "@assets/icons/Face/Angry";
 import { Fear } from "@assets/icons/Face/Fear";
 import { Happy } from "@assets/icons/Face/Happy";
@@ -6,14 +6,16 @@ import { Sad } from "@assets/icons/Face/Sad";
 import { Tired } from "@assets/icons/Face/Tired";
 import { Send } from "@assets/icons/Send";
 import { PrimaryButton } from "@components/shares/Buttons";
-import { OuterButton } from "@components/shares/Buttons/OuterButton";
+import { BaseButton } from "@components/shares/Buttons";
 import { PrimaryCard } from "@components/shares/Cards";
 import { PrimaryInputText } from "@components/shares/Inputs";
 import { ChangeEvent, useState } from "react";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export const Module = () => {
   // TODO: use form instead
+  const navigate = useNavigate();
   const [diary, setDiary] = useState<string>("");
 
   const handleDiaryChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,41 +37,41 @@ export const Module = () => {
       <div className="flex flex-col gap-4 mx-5">
         <h2 className="font-medium">How are you today?</h2>
         <div className="flex justify-around *:flex *:flex-col *:gap-2 *:items-center *:ease-linear *:duration-200">
-          <OuterButton
+          <BaseButton
             className={selectedMood === "happy" ? "drop-shadow-face-01" : ""}
             onClick={() => handleMoodClick("happy")}
           >
             <Happy />
             <p className="text-xs">Happy</p>
-          </OuterButton>
-          <OuterButton
+          </BaseButton>
+          <BaseButton
             className={selectedMood === "fear" ? "drop-shadow-face-02" : ""}
             onClick={() => handleMoodClick("fear")}
           >
             <Fear />
             <p className="text-xs">Fear</p>
-          </OuterButton>
-          <OuterButton
+          </BaseButton>
+          <BaseButton
             className={selectedMood === "sad" ? "drop-shadow-face-03" : ""}
             onClick={() => handleMoodClick("sad")}
           >
             <Sad />
             <p className="text-xs">Sad</p>
-          </OuterButton>
-          <OuterButton
+          </BaseButton>
+          <BaseButton
             className={selectedMood === "tired" ? "drop-shadow-face-04" : ""}
             onClick={() => handleMoodClick("tired")}
           >
             <Tired />
             <p className="text-xs">Tired</p>
-          </OuterButton>
-          <OuterButton
+          </BaseButton>
+          <BaseButton
             className={selectedMood === "angry" ? "drop-shadow-face-05" : ""}
             onClick={() => handleMoodClick("angry")}
           >
             <Angry />
             <p className="text-xs">Angry</p>
-          </OuterButton>
+          </BaseButton>
         </div>
 
         <PrimaryInputText
@@ -100,7 +102,7 @@ export const Module = () => {
                 type="default"
                 className="bg-green-01 text-xs text-white-01 font-semibold"
                 onClick={() => {
-                  toast.success("Starting Assessment!");
+                  navigate("/assessment");
                 }}
               />
             </div>
@@ -125,7 +127,7 @@ export const Module = () => {
               Managing Health Anxiety and Panic
             </p>
             <div className="absolute bottom-0 right-0 m-4">
-              <Arrow fillClassName="fill-orange-01" />
+              <LongArrow fillClassName="fill-orange-01" />
             </div>
           </PrimaryCard>
           <PrimaryCard className="relative justify-between bg-blue-03 bg-artikel-2 bg-right bg-no-repeat rounded-2xl min-w-32 max-w-32 h-32">
@@ -133,7 +135,7 @@ export const Module = () => {
               Insomnia and Sleep Disorder
             </p>
             <div className="absolute bottom-0 right-0 m-4">
-              <Arrow fillClassName="fill-blue-01" />
+              <LongArrow fillClassName="fill-blue-01" />
             </div>
           </PrimaryCard>
           <PrimaryCard className="relative justify-between bg-purple-02 bg-artikel-3 bg-right bg-no-repeat rounded-2xl min-w-32 max-w-32 h-32">
@@ -141,7 +143,7 @@ export const Module = () => {
               Managing Schizophernia
             </p>
             <div className="absolute bottom-0 right-0 m-4">
-              <Arrow fillClassName="fill-purple-01" />
+              <LongArrow fillClassName="fill-purple-01" />
             </div>
           </PrimaryCard>
         </div>

@@ -1,14 +1,14 @@
-type OuterButtonPropType = {
+type BaseButtonPropType = {
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
 };
 
-export const OuterButton = ({
+export const BaseButton = ({
   className,
   onClick,
   children
-}: OuterButtonPropType) => {
+}: BaseButtonPropType) => {
   return (
     <button
       onClick={onClick}

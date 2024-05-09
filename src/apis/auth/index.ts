@@ -2,7 +2,6 @@ import { IApiBaseAuthLogin } from '@interfaces/auth/login';
 import { api, support } from '@apis/support';
 import { IApiBaseResponse } from '@interfaces/api';
 import { IApiBaseAuthRefreshToken } from '@interfaces/auth';
-import { IApiBaseAuthRegister } from '@interfaces/auth/register';
 
 const auth = () => {
   const { apiUrl } = support();
@@ -24,7 +23,7 @@ const auth = () => {
         email,
         password
       }
-    )
+    );
 
     return response.data;
   }
@@ -35,14 +34,14 @@ const auth = () => {
     password: string,
     confirm_password: string
   ) => {
-    const response = await api.post<IApiBaseResponse<IApiBaseAuthRegister>>(
+    const response = await api.post<IApiBaseResponse<undefined>>(
       url.register, {
         username,
         email,
         password,
         confirm_password
       }
-    )
+    );
     
     return response.data;
   }
@@ -56,7 +55,7 @@ const auth = () => {
   }
 
   const logout = async () => {
-    const res = await api.post<IApiBaseResponse<null>>(
+    const res = await api.post<IApiBaseResponse<undefined>>(
       url.logout
     )
 

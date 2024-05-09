@@ -55,7 +55,7 @@ export const PrimaryInputText = ({
           value={value}
           onChange={setValue}
           disabled={disabled}
-          className={`rounded-xl shadow-input outline-none w-full box-border px-3 py-3 transition-all ease-in-out bg-white-01 text-sm text-neutral-700 ${
+          className={`rounded-xl shadow-input outline-none w-full box-border px-3 py-3 transition-all ease-in-out bg-white-01 text-sm text-neutral-800 ${
             error
               ? "shadow-input-error focus:shadow-input-focus-error"
               : "hover:shadow-input-hover focus:shadow-input-focus"
@@ -65,7 +65,7 @@ export const PrimaryInputText = ({
         />
 
         {(needEye || button) && (
-          <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3">
             {needEye && (
               <button
                 type="button"
@@ -87,9 +87,9 @@ export const PrimaryInputText = ({
       {error && (
         <div className="flex gap-2 items-center">
           <div className="w-3.5">
-            <Error fillClassName="w-3.5 fill-indicator-error mb-[1px]" />
+            <Error fillClassName="w-3.5 fill-danger mb-[1px]" />
           </div>
-          <p className="text-xs font-normal text-indicator-error">{error}</p>
+          <p className="text-xs font-normal text-danger">{error}</p>
         </div>
       )}
     </div>
