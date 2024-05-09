@@ -1,14 +1,11 @@
-import { BottomNav } from "@/components/shares/BottomNav";
+import { Bio } from "@components/privates/Profile/Bio";
+import { BottomNav } from "@components/shares/BottomNav";
 
 export const Profile = () => {
   return (
     <div className="flex flex-col h-screen relative items-stretch">
-      <div className="flex flex-col gap-5 overflow-y-auto overscroll-contain pb-[68px]">
-        <div className="flex justify-between px-5 pt-4">
-          <h1 className="text-[26px]">
-            Profile, <span className="block font-semibold">Uhuy!</span>
-          </h1>
-        </div>
+      <div className="relative h-screen overflow-y-auto overscroll-contain items-stretch bg-yellow-03 bg-logo-blank bg-top bg-no-repeat">
+        <Bio />
       </div>
       <BottomNav screen={"profile"} />
     </div>

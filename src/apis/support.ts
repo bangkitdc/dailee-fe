@@ -19,8 +19,15 @@ export const support = () => {
     },
     
     user: {
-      self: "/self",
-    }
+      self: "users/self",
+    },
+
+    assessment: {
+      questions: "assessments/questions",
+      submit: "assessments/submit"
+    },
+
+    taskCategory: "task-categories"
   };
 
   return { apiUrl };

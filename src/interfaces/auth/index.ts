@@ -10,13 +10,16 @@ export type IApiBaseAuthContext = {
     password: string
   ) => Promise<IApiBaseResponse<IApiBaseAuthLogin>>;
 
-  // register: (
-  //   username: string,
-  //   email: string,
-  //   password: string
-  // ) => Promise<void>;
+  register: (
+    username: string,
+    email: string,
+    password: string,
+    confirm_password: string
+  ) => Promise<IApiBaseResponse<undefined>>;
 
-  // logout: () => Promise<void>;
+  logout: () => Promise<IApiBaseResponse<undefined>>;
+
+  self: () => Promise<IApiBaseResponse<IApiBaseUserSelf>>;
 }
 
 export type IApiBaseAuthRefreshToken = {

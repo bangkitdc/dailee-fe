@@ -22,6 +22,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (res.status === "success") {
       setUser(res.data);
     }
+
+    return res;
   };
 
   const login = async (email: string, password: string) => {
@@ -31,33 +33,43 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Set token to header
       setToken(res.data.token);
       setUser(res.data.user);
-      navigate("/");
+
+      if (res.data.user.already_test) {
+        navigate("/");
+      } else {
+        navigate("/assessment");
+      }
     }
 
     return res;
   };
 
-  // const register = async (
-  //   username: string,
-  //   email: string,
-  //   password: string
-  // ) => {
-  //   const res = await apiBase().auth().register(username, email, password);
+  const register = async (
+    username: string,
+    email: string,
+    password: string,
+    confirm_password: string
+  ) => {
+    const res = await apiBase().auth().register(username, email, password, confirm_password);
 
-  //   if (res.status === "success") {
-  //     navigate("/login");
-  //   }
-  // };
+    if (res.status === "success") {
+      navigate("/login");
+    }
 
-  // const logout = async () => {
-  //   const res = await apiBase().auth().logout();
+    return res;
+  };
 
-  //   if (res.status === "success") {
-  //     setToken(null);
-  //     setUser(null);
-  //     navigate("/login");
-  //   }
-  // };
+  const logout = async () => {
+    const res = await apiBase().auth().logout();
+
+    if (res.status === "success") {
+      setToken(null);
+      setUser(null);
+      navigate("/login");
+    }
+
+    return res;
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -70,7 +82,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       } finally {
         setIsLoading(false);
       }
-    }, 1000);
+    }, 0);
 
     return () => clearTimeout(delay);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,7 +92,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
-        login
+        login,
+        register,
+        logout,
+        self
       }}
     >
       {isLoading ? <div className="h-screen"></div> : children}

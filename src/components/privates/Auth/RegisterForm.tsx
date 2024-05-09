@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { apiBase } from "@apis";
 import toast from "react-hot-toast";
 import { IApiBaseError } from "@interfaces/api";
+import { useAuth } from "@contexts";
 
 const initialRegisterFormData: IApiBaseRegisterForm = {
   username: "",
@@ -21,6 +22,7 @@ export const RegisterForm = () => {
   const navigate = useNavigate();
 
   // Register functionality
+  const { register } = useAuth();
   const [registerFormData, setRegisterFormData] = useState<IApiBaseRegisterForm>(initialRegisterFormData);
   const apiBaseError = apiBase().error<IApiBaseError>();
 
@@ -44,15 +46,15 @@ export const RegisterForm = () => {
 
   const handleSubmit = async () => {
     try {
-      const res = await apiBase().auth().register(
+      const res = await register(
         registerFormData.username,
-        registerFormData.email, 
+        registerFormData.email,
         registerFormData.password,
         registerFormData.confirm_password
       );
 
       if (res.status === "success") {
-        toast.success("Register successful!");
+        toast.success(res.message);
       }
     } catch (error) {
       apiBaseError.set(error);
@@ -95,7 +97,7 @@ export const RegisterForm = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 1); // Trick for trigger
+    }, 10); // Trick for trigger
 
     return () => clearTimeout(timeout);
   }, []);
@@ -106,7 +108,7 @@ export const RegisterForm = () => {
       ${loading ? "-bottom-full" : "bottom-0"}
       overflow-y-auto`}
     >
-      <div className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <h1 className="text-3xl font-bold text-orange-01">Register</h1>
         <div className="flex flex-col gap-6">
           <PrimaryInputText
@@ -166,8 +168,8 @@ export const RegisterForm = () => {
         <div className="flex flex-col justify-between gap-12">
           <PrimaryButton
             text="Register"
+            type="submit"
             className="bg-orange-01 text-neutral-0 py-2.5 mt-3 font-semibold"
-            onClick={handleSubmit}
           />
 
           <div className="text-xs font-normal text-neutral-500 justify-center flex">
@@ -180,7 +182,7 @@ export const RegisterForm = () => {
             />
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

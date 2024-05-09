@@ -1,4 +1,5 @@
 import { useAuth } from '@contexts';
+import { Assessment } from '@pages/Assessment';
 import { Home } from '@pages/Home';
 import { Login } from '@pages/Login';
 import { Planner } from '@pages/Planner';
@@ -10,8 +11,14 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 function App() {
   const { user } = useAuth();
 
-  const ProtectedRoute = ({ element }: { element: React.ReactNode }) => {
-    return user ? element : <Navigate to="/login" replace />;
+  const ProtectedRoute = ({ isAssessment, element }: { isAssessment?: boolean, element: React.ReactNode }) => {
+    if (user) {
+      if (!user.already_test && !isAssessment) {
+        return <Navigate to="/assessment" replace />;
+      }
+
+      return element;
+    }
   };
 
   const UnprotectedRoute = ({ element }: { element: React.ReactNode }) => {
@@ -30,6 +37,11 @@ function App() {
         path="/profile"
         element={<ProtectedRoute element={<Profile />} />}
       />
+      <Route
+        path="/assessment"
+        element={<ProtectedRoute isAssessment={true} element={<Assessment />} />}
+      />
+
       <Route
         path="/login"
         element={<UnprotectedRoute element={<Login />} />}

@@ -2,7 +2,7 @@ type IconPropType = {
   fillClassName: string
 };
 
-export const Arrow = ({
+export const LongArrow = ({
   fillClassName,
 }: IconPropType) => {
   return (

@@ -26,6 +26,8 @@ export default {
 
         "brown-01": "#573926",
         "brown-02": "#785226",
+        "brown-03": "#9F6F34",
+        "brown-04": "#EBC57A",
 
         "cream-01": "#FFFBE7",
 
@@ -36,8 +38,10 @@ export default {
 
         "black-01": "#000000",
 
-        "neutral-700": "#1F1F1F",
+        "neutral-800": "#1F1F1F",
+        "neutral-700": "#414141",
         "neutral-600": "#545454",
+        "neutral-550": "#72777A",
         "neutral-500": "#A2A2A2",
         "neutral-400": "#CACACA",
         "neutral-300": "#E1E1E1",
@@ -48,7 +52,7 @@ export default {
 
         "input-icon": "#9A9A9A",
 
-        "indicator-error": "#F43518",
+        danger: "#E04B4B",
       },
       fontFamily: {
         poppins: ["Poppins"],
@@ -61,6 +65,8 @@ export default {
         "students-module":
           "url('/icons/bg-students-module.svg'), linear-gradient(to bottom, rgba(246, 237, 207, 0.5), rgba(243, 220, 152, 0.75))",
         logo: "url('/icons/bg-logo.svg')",
+        "logo-blank": "url('/icons/bg-logo-blank.svg')",
+        "logo-assessment": "url('/icons/bg-logo-assessment.svg')"
       },
       boxShadow: {
         input: "0 0 0 1px #E3E5E5",
