@@ -44,4 +44,5 @@ const useError = <TError = unknown>() => {
   return { set, getErrors, getMessage, getStatusCode, clear };
 }
 
+export type IApiBaseErrorType = ReturnType<typeof useError>;
 export default useError;

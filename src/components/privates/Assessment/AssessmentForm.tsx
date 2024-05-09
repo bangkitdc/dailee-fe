@@ -257,11 +257,11 @@ export const AssessmentForm = () => {
                 </div>
               </div>
             </DndContext>
-            <div className="px-6">
+            <div className="px-6 mt-3">
               <PrimaryButton
                 text="Finish"
                 type="default"
-                className="bg-orange-01 text-neutral-0 py-2.5 mt-3 font-semibold w-full"
+                className="bg-orange-01 text-neutral-0 py-2.5 font-semibold w-full"
                 onClick={handleSubmit}
               />
             </div>
