@@ -1,7 +1,6 @@
 import { apiBase } from "@apis";
 import { PrimaryButton } from "@components/shares/Buttons";
 import { Edit } from "@assets/icons/Edit";
-import { useAuth } from "@contexts";
 import { Ping } from './Ping';
 import { IApiBaseError } from "@interfaces/api";
 import { ChangeEvent, useState } from "react";
@@ -11,7 +10,6 @@ import { PrimaryInputText } from "@components/shares/Inputs";
 
 
 export const SocialCom = () => {
-    const { user } = useAuth();
     const apiBaseError = apiBase().error<IApiBaseError>();
 
     // PING

@@ -127,7 +127,19 @@ export const Module = () => {
               Managing Health Anxiety and Panic
             </p>
             <div className="absolute bottom-0 right-0 m-4">
-              <LongArrow fillClassName="fill-orange-01" />
+              <button
+                className="p-0"
+                style={{
+                    border: "none",
+                    background: "none",
+                    cursor: "pointer"
+                }}
+                onClick={() => {
+                    navigate("/healthymind");
+                }}
+            >
+                <LongArrow fillClassName="fill-orange-01" />
+            </button>
             </div>
           </PrimaryCard>
           <PrimaryCard className="relative justify-between bg-blue-03 bg-artikel-2 bg-right bg-no-repeat rounded-2xl min-w-32 max-w-32 h-32">
@@ -135,7 +147,19 @@ export const Module = () => {
               Insomnia and Sleep Disorder
             </p>
             <div className="absolute bottom-0 right-0 m-4">
-              <LongArrow fillClassName="fill-blue-01" />
+              <button
+                  className="p-0"
+                  style={{
+                      border: "none",
+                      background: "none",
+                      cursor: "pointer"
+                  }}
+                  onClick={() => {
+                      navigate("/healthymind");
+                  }}
+              >
+                  <LongArrow fillClassName="fill-blue-01" />
+              </button>
             </div>
           </PrimaryCard>
           <PrimaryCard className="relative justify-between bg-purple-02 bg-artikel-3 bg-right bg-no-repeat rounded-2xl min-w-32 max-w-32 h-32">
@@ -143,7 +167,19 @@ export const Module = () => {
               Managing Schizophernia
             </p>
             <div className="absolute bottom-0 right-0 m-4">
-              <LongArrow fillClassName="fill-purple-01" />
+              <button
+                    className="p-0"
+                    style={{
+                        border: "none",
+                        background: "none",
+                        cursor: "pointer"
+                    }}
+                    onClick={() => {
+                        navigate("/healthymind");
+                    }}
+                >
+                    <LongArrow fillClassName="fill-purple-01" />
+                </button>
             </div>
           </PrimaryCard>
         </div>
@@ -159,7 +195,9 @@ export const Module = () => {
                 text="Access Now"
                 type="default"
                 className="bg-white-01 text-xs text-orange-01 w-fit font-semibold"
-                onClick={() => console.log()}
+                onClick={() => {
+                  navigate("/module");
+                }}
               />
             </div>
           </PrimaryCard>

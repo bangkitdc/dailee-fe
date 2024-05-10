@@ -6,6 +6,8 @@ import { Planner } from '@pages/Planner';
 import { Profile } from '@pages/Profile';
 import { Register } from '@pages/Register';
 import { Social } from '@pages/Social';
+import { HealthyMind } from '@pages/HealthyMind';
+import { Module } from '@pages/Module';
 import { Navigate, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -40,6 +42,14 @@ function App() {
       <Route
         path="/assessment"
         element={<ProtectedRoute isAssessment={true} element={<Assessment />} />}
+      />
+      <Route
+        path="/healthymind"
+        element={<ProtectedRoute element={<HealthyMind/>} />}
+      />
+      <Route
+        path="/module"
+        element={<ProtectedRoute element={<Module/>} />}
       />
 
       <Route
