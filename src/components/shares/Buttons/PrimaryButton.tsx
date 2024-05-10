@@ -3,6 +3,7 @@ type PrimaryButtonPropType = {
   type?: "default" | "text-only" | "icon-only" | "submit" | "topic" | "disabled"
   icon?: React.ReactNode
   className?: string
+  disabled?: boolean
   onClick?: () => void
 };
 
@@ -11,10 +12,12 @@ export const PrimaryButton = ({
   type = "default",
   icon,
   className,
-  onClick
+  onClick,
+  disabled
 }: PrimaryButtonPropType) => {
   return (
     <button
+      disabled={disabled}
       onClick={onClick}
       type={type === "submit" ? "submit" : "button"}
       className={`${

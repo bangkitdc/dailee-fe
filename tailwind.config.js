@@ -7,6 +7,7 @@ export default {
         "yellow-01": "#F3DC98",
         "yellow-02": "#F6E6B6",
         "yellow-03": "#F6EDCF",
+        "yellow-04": "#FAF6E9",
 
         "orange-01": "#EFAA56",
         "orange-02": "#F5BD69",
