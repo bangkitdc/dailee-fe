@@ -66,7 +66,7 @@ export default {
           "url('/icons/bg-students-module.svg'), linear-gradient(to bottom, rgba(246, 237, 207, 0.5), rgba(243, 220, 152, 0.75))",
         logo: "url('/icons/bg-logo.svg')",
         "logo-blank": "url('/icons/bg-logo-blank.svg')",
-        "logo-assessment": "url('/icons/bg-logo-assessment.svg')"
+        "logo-assessment": "url('/icons/bg-logo-assessment.svg')",
       },
       boxShadow: {
         input: "0 0 0 1px #E3E5E5",
@@ -80,6 +80,8 @@ export default {
         "face-03": "0 10px 20px rgba(84, 84, 84, 0.5)",
         "face-04": "0 10px 20px rgba(246, 179, 79, 1)",
         "face-05": "0 10px 20px rgba(236, 105, 105, 1)",
+
+        fab: "0 5px 10px rgba(246, 207, 173, 1)",
       },
       animation: {
         popUp:

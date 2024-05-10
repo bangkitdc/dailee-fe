@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from "react";
 
 type PrimaryInputTextPropType = {
   id: string;
+  label?: string;
   placeholder?: string;
   disabled?: boolean;
   type?: "text" | "password" | "password-no-eye";
@@ -17,6 +18,7 @@ type PrimaryInputTextPropType = {
 
 export const PrimaryInputText = ({
   id,
+  label = "",
   placeholder = "",
   disabled = false,
   type = "text",
@@ -38,6 +40,12 @@ export const PrimaryInputText = ({
 
   return (
     <div className="flex flex-col gap-2">
+      <label
+        htmlFor={id}
+        className="text-xs font-medium block w-fit text-neutral-800"
+      >
+        {label}
+      </label>
       <div className="relative">
         {icon && (
           <div className="absolute inset-y-0 left-0 flex items-center pl-3">
