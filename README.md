@@ -1,30 +1,22 @@
-# React + TypeScript + Vite
+# Dailee App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## General Information
+Dailee merupakan sebuah platform pengelolaan prioritas tugas dengan perhatian kesejahteraan mental. Objektif Dailee adalah melakukan tindakan preventif dan promotif untuk mencegah dan meregulasi dampak negatif kesehatan mental terutama dengan semakin meningkatnya angka gangguan kesehatan mental di masyarakat yang tidak diimbangi dengan kesadaran oleh masyarakat.
 
-Currently, two official plugins are available:
+Aplikasi ini memiliki beberapa fitur, yaitu:
+- Dailee Routine Planner<br>
+Menghasilkan task planner harian dan rekomendasi self mental care berdasarkan kondisi mental pengguna. Parameter-parameter yang digunakan dalam pembuatan artificial intelligence untuk fitur ini adalah tanggal tenggat waktu tugas, urutan kategori yang disukai dan tidak disukai oleh pengguna, hasil mental health assessment pengguna, serta suasana hati pengguna setiap harinya. Fitur ini juga mempertimbangkan jumlah pekerjaan yang dilakukan setiap harinya dengan harapan pembagian tugas yang tepat dan mencegah terjadinya burnout.
+- Dailee PING <br>
+Platform komunitas dengan pengguna lain sehingga dapat berinteraksi secara terbuka tanpa rasa malu atau kesepian.
+- Dailee Road to Self Care <br>
+Menilai kesehatan mental pengguna dan memberikan dukungan dalam bentuk rekomendasi self mental care dan modul pembelajaran. Di sela-sela fitur planner, akan disisipkan rekomendasi self mental care berdasarkan hasil mental health assessment pengguna dan goal yang ingin dicapai oleh pengguna.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Team UHUY
+- M. Bangkit Dwi C. (Hacker)
+- Rania Sasi Kirana (Hustler)
+- Miralistya Cahya F. (Hipster)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Tech Stack
+1. React + Vite (Frontend)
+2. Express.js (Backend)
+3. PostgreSQL (Database)
