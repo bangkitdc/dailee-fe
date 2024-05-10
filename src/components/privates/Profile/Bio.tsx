@@ -56,7 +56,7 @@ export const Bio = () => {
           <p className="text-xs">{user?.email}</p>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 w-full h-[70vh] z-10 bg-neutral-0 rounded-t-2xl py-7 overflow-y-auto">
+      <div className="absolute bottom-0 left-0 w-full h-[70vh] z-10 bg-neutral-0 rounded-t-2xl py-7 overflow-y-auto pb-[68px]">
         <div className="flex flex-col gap-0 *:flex *:justify-between *:px-6 *:py-4 *:border-b">
           <BaseButton>
             <div className="flex flex-row items-center gap-4 justify-center">
