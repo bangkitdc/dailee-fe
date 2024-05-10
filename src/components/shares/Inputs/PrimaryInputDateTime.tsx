@@ -1,4 +1,6 @@
 import { Error } from "@assets/icons/Error";
+// import { TimePicker } from "antd";
+// import dayjs, { Dayjs } from "dayjs";
 import { ChangeEvent } from "react";
 
 type PrimaryInputDateTimePropType = {
@@ -6,7 +8,7 @@ type PrimaryInputDateTimePropType = {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
-  type?: "date" | "time";
+  type?: "date" | "time" | "datetime-local";
   value: string;
   error?: string;
   setValue: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -36,6 +38,15 @@ export const PrimaryInputDateTime = ({
     return formattedDate;
   };
 
+  // const handleTimeChange = (time: Dayjs) => {
+  //   // Adapt the time string to fit the expected format of setValue
+  //   setValue({
+  //     target: {
+  //       value: time.toString(),
+  //     },
+  //   } as ChangeEvent<HTMLInputElement>);
+  // };
+
   return (
     <div className="flex flex-col gap-2">
       <label
@@ -45,22 +56,40 @@ export const PrimaryInputDateTime = ({
         {label}
       </label>
       <div className="relative">
-        <input
-          id={id}
-          type={type}
-          min={minToday ? setMinDate() : undefined}
-          placeholder={placeholder}
-          value={value}
-          onChange={setValue}
-          disabled={disabled}
-          className={`rounded-xl shadow-input outline-none w-full box-border px-3 py-3 transition-all ease-in-out bg-white-01 text-sm text-neutral-800 ${
-            error
-              ? "shadow-input-error focus:shadow-input-focus-error"
-              : "hover:shadow-input-hover focus:shadow-input-focus"
-          }
-          ${disabled ? "bg-gray-500" : ""}
-          ${className}`}
-        />
+        {/* {type === "time" && (
+          <TimePicker
+            id={id}
+            format={"HH:mm"}
+            className={`rounded-xl shadow-input outline-none w-full box-border px-3 py-3 transition-all ease-in-out bg-white-01 text-sm text-neutral-800 ${
+              error
+                ? "shadow-input-error focus:shadow-input-focus-error"
+                : "hover:shadow-input-hover focus:shadow-input-focus"
+            }
+            ${disabled ? "bg-gray-500" : ""}
+            ${className}`}
+            value={dayjs(value)}
+            onChange={handleTimeChange}
+          />
+        )} */}
+
+        {(
+          <input
+            id={id}
+            type={type}
+            min={minToday ? setMinDate() : undefined}
+            placeholder={placeholder}
+            value={value}
+            onChange={setValue}
+            disabled={disabled}
+            className={`rounded-xl shadow-input outline-none w-full box-border px-3 py-3 transition-all ease-in-out bg-white-01 text-sm text-neutral-800 ${
+              error
+                ? "shadow-input-error focus:shadow-input-focus-error"
+                : "hover:shadow-input-hover focus:shadow-input-focus"
+            }
+            ${disabled ? "bg-gray-500" : ""}
+            ${className}`}
+          />
+        )}
       </div>
 
       {error && (

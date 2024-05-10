@@ -32,7 +32,8 @@
       "@interfaces/*": ["interfaces/*"],
       "@pages/*": ["pages/*"],
       "@providers": ["providers"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@libs": ["libs"],
     }
   },
   "include": ["src"],

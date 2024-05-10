@@ -30,7 +30,13 @@ export const support = () => {
     taskCategory: {
       self: "task-categories",
       addValidate: "task-categories/add-validate"
-    }
+    },
+
+    task: {
+      self: "tasks",
+      getTask: "tasks/task",
+      getCompletedTask: "tasks/completed",
+    },
   };
 
   return { apiUrl };

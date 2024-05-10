@@ -1,7 +1,6 @@
 import { apiBase } from "@apis";
 import { Adjustment } from "@assets/icons/Adjustment";
 import { BaseButton, PrimaryButton } from "@components/shares/Buttons";
-import { useAuth } from "@contexts";
 import { IApiBaseError } from "@interfaces/api";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -12,9 +11,11 @@ import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-ki
 import { DndCard } from "@components/shares/DndCards";
 import { IApiBaseTaskCategory } from "@interfaces/taskCategory";
 import { PlusCircle, PlusFAB } from "@assets/icons/Plus";
-import { PrimaryInputText } from "@components/shares/Inputs";
+import { PrimaryInputDateTime, PrimaryInputDropdown, PrimaryInputText } from "@components/shares/Inputs";
 import { IApiBaseTask } from "@interfaces/task";
-import { PrimaryInputDateTime } from "@components/shares/Inputs/PrimaryInputDateTime";
+import { libs } from "@libs";
+import { TaskCard } from "./TaskCard";
+import { History } from "@assets/icons/History";
 
 const initialTaskCategory: IApiBaseTaskCategory = {
   task_category_id: -1,
@@ -31,7 +32,7 @@ const initialTaskForm: IApiBaseTask = {
 }
 
 export const List = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const apiBaseError = apiBase().error<IApiBaseError>();
 
   // Modal
@@ -68,28 +69,119 @@ export const List = () => {
   const [modalAddTaskOpen, setModalAddTaskOpen] = useState<boolean>(false);
   const [taskForm, setTaskForm] = useState<IApiBaseTask>(initialTaskForm);
 
-  const handleAddTaskValidate = async () => {
+  const handleAddTask = async () => {
     try {
-      // const res = await apiBase().taskCategory().addValidateTaskCategory(
-      //   newTaskCategory
-      // );
+      const res = await apiBase().task().addOrUpdateTask(
+        taskForm
+      );
 
-      // if (res.status === "success") {
-      //   setModalAddTaskOpen(false);
-      //   setTaskCategories((prevCategories) => [
-      //     ...prevCategories,
-      //     newTaskCategory,
-      //   ]);
+      if (res.status === "success") {
+        setModalAddTaskOpen(false);
+        toast.success(res.message);
+        
+        await fetchTasks(selectedDate);
 
-      //   apiBaseError.clear();
-
-      //   setNewTaskCategory(initialTaskCategory);
-      // }
+        apiBaseError.clear();
+      }
     } catch (error) {
       apiBaseError.set(error);
       toast.error(apiBaseError.getMessage() ?? "Error occured");
     }
   }
+
+  const handleEdit = (task: IApiBaseTask) => {
+    setModalAddTaskOpen(true);
+    setTaskForm(task);
+  }
+
+  const [isHistory, setIsHistory] = useState<boolean>(false);
+
+  const handleFetchHistory = async () => {
+    try {
+      const res = await apiBase().task().getCompletedTask();
+
+      if (res.status === "success") {
+        // Set tasks data
+        setTasks(res.data);
+
+        apiBaseError.clear();
+        setIsHistory(true);
+      }
+    } catch (error) {
+      apiBaseError.set(error);
+      toast.error(apiBaseError.getMessage() ?? "Error occured");
+    }
+  }
+
+  const handleCheckTask = async (task: IApiBaseTask) => {
+    try {
+      if (task.task_id) {
+        const res = await apiBase().task().checkTask(task.task_id);
+
+        if (res.status === "success") {
+          toast.success(res.message);
+
+          // Wait for 1000 ms
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+
+          if (isHistory) {
+            await handleFetchHistory();
+          } else {
+            await fetchTasks(selectedDate);
+          }
+
+          apiBaseError.clear();
+        }
+      }
+    } catch (error) {
+      apiBaseError.set(error);
+      toast.error(apiBaseError.getMessage() ?? "Error occured");
+    }
+  }
+
+  const customLib = libs();
+  const handleTaskFormDataChange = (
+    name: keyof IApiBaseTask,
+    value: string | number
+  ) => {
+    let parsedVal: string | number = value;
+
+    if (name === "task_duration" && typeof value == "string") {
+      parsedVal = customLib.timeStringToMinutes(value);
+    }
+
+    setTaskForm({
+      ...taskForm,
+      [name]: parsedVal,
+    });
+  };
+
+  const [tasks, setTasks] = useState<any[]>([]);
+  const fetchTasks = async (date: Date) => {
+    try {
+      const res = await apiBase().task().getTask(
+        customLib.formatDateInput(date)
+      );
+
+      if (res.status === "success") {
+        // Set tasks data
+        setTasks(res.data);
+      }
+    } catch (error) {
+      apiBaseError.set(error);
+      toast.error(apiBaseError.getMessage() ?? "Error occured");
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks(today);
+  }, []);
+
+  const handleDateChange = (date: Date) => {
+    setSelectedDate(date);
+    fetchTasks(date);
+    setIsHistory(false);
+  };
 
   // Date
   const today = new Date();
@@ -137,7 +229,12 @@ export const List = () => {
       );
 
       if (res.status === "success") {
+        setModalOpen(false);
         toast.success(res.message);
+
+        await fetchTasks(selectedDate);
+
+        apiBaseError.clear();
       }
     } catch (error) {
       apiBaseError.set(error);
@@ -286,32 +383,56 @@ export const List = () => {
             type="text"
             placeholder="Task name"
             value={taskForm.task_name}
-            setValue={(e) => console.log()}
+            setValue={(e) =>
+              handleTaskFormDataChange("task_name", e.target.value)
+            }
             error={apiBaseError.getErrors("task_name")?.[0].toString()}
           />
           <PrimaryInputDateTime
             id="deadline"
             label="Deadline"
-            className="p-2 text-xs"
+            type="datetime-local"
+            className="p-1 text-xs h-[42px]"
             minToday={true}
-            value={taskForm.deadline}
-            setValue={(e) => console.log()}
+            value={customLib.formatDeadlineForm(taskForm.deadline)}
+            setValue={(e) =>
+              handleTaskFormDataChange("deadline", e.target.value)
+            }
             error={apiBaseError.getErrors("deadline")?.[0].toString()}
           />
           <PrimaryInputDateTime
-            id="duration"
+            id="task_duration"
             label="Estimated Completion Time"
-            className="p-2 text-xs"
+            className="p-1 text-xs h-[42px]"
             type="time"
-            value={taskForm.task_duration}
-            setValue={(e) => console.log()}
+            value={customLib.minutesToTimeString(taskForm.task_duration)}
+            setValue={(e) =>
+              handleTaskFormDataChange("task_duration", e.target.value)
+            }
             error={apiBaseError.getErrors("task_duration")?.[0].toString()}
+          />
+          <PrimaryInputDropdown
+            id="task_category_id"
+            label="Task Category"
+            className="text-xs"
+            options={taskCategories.map((category) => ({
+              value: category.task_category_id,
+              label: category.task_category_name,
+            }))}
+            selectedValue={taskForm.task_category_id}
+            setValue={(e) =>
+              handleTaskFormDataChange(
+                "task_category_id",
+                parseInt(e.target.value)
+              )
+            }
+            error={apiBaseError.getErrors("task_category_id")?.[0].toString()}
           />
           <div className="mt-3">
             <PrimaryButton
               text="Submit"
               className="bg-orange-01 text-neutral-0 py-2.5 font-semibold w-full"
-              onClick={handleAddTaskValidate}
+              onClick={handleAddTask}
             />
           </div>
         </div>
@@ -324,21 +445,74 @@ export const List = () => {
         <div className="fixed top-0 w-full max-w-[430px] h-[25vh] flex flex-col gap-3 text-neutral-700 p-5">
           <div className="flex flex-row justify-between items-center">
             <h1 className="text-2xl font-bold">Daily Planner</h1>
-            <PrimaryButton
-              type="icon-only"
-              icon={<Adjustment fillClassName="fill-neutral-700" />}
-              onClick={() => setModalOpen(true)}
-            />
+            <div className="flex gap-1">
+              <PrimaryButton
+                type="icon-only"
+                icon={
+                  <History
+                    fillClassName="fill-neutral-700"
+                    strokeClassName="stroke-neutral-700"
+                  />
+                }
+                onClick={handleFetchHistory}
+              />
+              <PrimaryButton
+                type="icon-only"
+                icon={<Adjustment fillClassName="fill-neutral-700" />}
+                onClick={() => setModalOpen(true)}
+              />
+            </div>
           </div>
           <div className="flex-grow grid grid-cols-7 gap-3 items-center justify-center">
             {dates.map((date, index) => (
-              <BaseButton key={index} onClick={() => setSelectedDate(date)}>
+              <BaseButton key={index} onClick={() => handleDateChange(date)}>
                 <DateCard date={date} selectedDate={selectedDate} />
               </BaseButton>
             ))}
           </div>
         </div>
-        <div className="absolute bottom-0 w-full h-[75vh] z-10 bg-neutral-0 rounded-t-2xl px-7 py-10 overflow-y-auto"></div>
+
+        <div className="absolute bottom-0 w-full h-[75vh] z-10 bg-neutral-0 rounded-t-2xl px-7 py-10 overflow-y-auto">
+          <div className="flex flex-col gap-4 pb-16">
+            <div className="pb-2">
+              <p className="text-lg font-bold text-neutral-600">{isHistory ? "Completed Tasks" : "Your Tasks"}</p>
+            </div>
+            {tasks &&
+              tasks.map((task, index) => (
+                <div key={`${task.task_name}-${index}`}>
+                  <TaskCard
+                    is_recommendation={task.rec_name != null}
+                    name={task.task_name ?? task.rec_name}
+                    duration={
+                      task.task_duration
+                        ? customLib.formatTime(task.task_duration)
+                        : customLib.formatTime(task.rec_duration)
+                    }
+                    status={task.status ?? undefined}
+                    deadline={
+                      task.deadline
+                        ? customLib.formatDeadline(task.deadline)
+                        : undefined
+                    }
+                    category={
+                      task.task_category_id
+                        ? taskCategories.find(
+                            (category) =>
+                              category.task_category_id ===
+                              task.task_category_id
+                          )?.task_category_name
+                        : undefined
+                    }
+                    onClick={() => {
+                      handleCheckTask(task);
+                    }}
+                    onEdit={() => handleEdit(task)}
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
+
         <div className="absolute bottom-[92px] right-6 z-20">
           <PrimaryButton
             className="bg-orange-01 rounded-full p-3 drop-shadow-fab"

@@ -20,6 +20,7 @@ export default defineConfig({
       "@pages": path.resolve(__dirname, './src/pages'),
       "@providers": path.resolve(__dirname, './src/providers'),
       "@hooks": path.resolve(__dirname, './src/hooks'),
+      "@libs": path.resolve(__dirname, './src/libs'),
     }
   },
 })
