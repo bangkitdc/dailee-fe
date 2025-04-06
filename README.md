@@ -1,5 +1,8 @@
 # Dailee App
 
+## BE
+https://github.com/bangkitdc/dailee-be
+
 ## General Information
 Dailee merupakan sebuah platform pengelolaan prioritas tugas dengan perhatian kesejahteraan mental. Objektif Dailee adalah melakukan tindakan preventif dan promotif untuk mencegah dan meregulasi dampak negatif kesehatan mental terutama dengan semakin meningkatnya angka gangguan kesehatan mental di masyarakat yang tidak diimbangi dengan kesadaran oleh masyarakat.
 
